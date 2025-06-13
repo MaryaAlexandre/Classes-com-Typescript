@@ -1,18 +1,17 @@
-// tests/interface.test.ts
 
-import { Car } from '../src/interface/Car';
-import { Bicycle } from '../src/interface/Bicycle';
+import { Carro } from '../src/interface/carro';
+import { Bicicleta } from '../src/interface/bicicleta';
 
-describe('Testes para classes que implementam a interface Vehicle', () => {
-  test('Car move() retorna mensagem correta após alterar velocidade', () => {
-    const car = new Car('Toyota Corolla', 100);
-    car.setSpeed(120);
-    expect(car.move()).toBe('Toyota Corolla is moving at 120 km/h');
+describe('Teste da interface Veiculo', () => {
+  test('Carro deve mover e alterar velocidade', () => {
+    const carro = new Carro('Fiat', 80);
+    carro.setVelocidade(100);
+    expect(carro.mover()).toBe('Fiat está se movendo a 100 km/h');
   });
 
-  test('Bicycle move() retorna mensagem correta após alterar marcha', () => {
-    const bike = new Bicycle(3);
-    bike.changeGear(5);
-    expect(bike.move()).toBe('Bicycle is moving with gear 5');
+  test('Bicicleta deve mover e alterar velocidade', () => {
+    const bicicleta = new Bicicleta('montanha', 20);
+    bicicleta.setVelocidade(25);
+    expect(bicicleta.mover()).toBe('A bicicleta do tipo montanha está se movendo a 25 km/h');
   });
 });
