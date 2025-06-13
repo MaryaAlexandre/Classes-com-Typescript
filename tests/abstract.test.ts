@@ -1,23 +1,27 @@
-// tests/abstract.test.ts
 
-import { Developer } from '../src/abstract/Developer';
-import { Manager } from '../src/abstract/Manager';
-import { Employee } from '../src/abstract/Employee';
+import { Desenvolvedor } from '../src/abstract/desenvolvedor';
+import { Gerente } from '../src/abstract/gerente';
+import { Funcionario } from '../src/abstract/funcionario';
 
-describe('Testes para subclasses da classe abstrata Employee', () => {
-  test('calculateSalary() de Developer e Manager retorna valores corretos', () => {
-    const dev = new Developer(80, 160); // 80 * 160 = 12800
-    const manager = new Manager(5000, 1000); // 5000 + 1000 = 6000
-
-    expect(dev.calculateSalary()).toBe(12800);
-    expect(manager.calculateSalary()).toBe(6000);
+describe('Teste das subclasses de Funcionario', () => {
+  test('Desenvolvedor calcula salário corretamente', () => {
+    const dev = new Desenvolvedor('Ana', 160, 50);
+    expect(dev.calcularSalario()).toBe(8000);
+    dev.setValorHora(60);
+    expect(dev.calcularSalario()).toBe(9600);
   });
 
-  test('totalAnnualSalary() retorna soma dos salários calculados', () => {
-    const dev = new Developer(100, 180); // 100 * 180 = 18000
-    const manager = new Manager(7000, 2000); // 7000 + 2000 = 9000
+  test('Gerente calcula salário corretamente', () => {
+    const gerente = new Gerente('Carlos', 160, 10000);
+    expect(gerente.calcularSalario()).toBe(10000);
+    gerente.setSalarioFixo(12000);
+    expect(gerente.calcularSalario()).toBe(12000);
+  });
 
-    const total = Employee.totalAnnualSalary([dev, manager]);
-    expect(total).toBe(27000);
+  test('FuncFuncionario calcularPagamentoMedio está correto', () => {
+    const dev = new Desenvolvedor('Ana', 160, 50);
+    const gerente = new Gerente('Carlos', 160, 10000);
+    const media = Funcionario.calcularPagamentoMedio([dev, gerente]);
+    expect(media).toBe((dev.calcularSalario() + gerente.calcularSalario()) / 2);
   });
 });
